@@ -291,7 +291,7 @@
       </div>
       <div class="row">
         <div class="col-md text-center">
-          <button class="w-20 btn btn-primary btn-lg" id="back_button" onclick="window.location.replace('https://er3.ext.egovstack.net/en/services-new/2c92808d8187123601824e31d8530189?file_id=c54839bc-5726-44e5-92c0-c9527fa830c8');">Back to the service</button>
+          <button class="w-20 btn btn-primary btn-lg" id="back_button" onclick="redirect();">Back to the service</button>
         </div>
       </div>
     </div>
@@ -313,23 +313,33 @@
       <script src="form-validation.js"></script>
 
       <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const redirectID = urlParams.get('id')
+
         function hidePaymentForm(){
           document.getElementById("payment_details").className = "d-none";
           document.getElementById("payment_done").className = "d-block";
-          redirectTimer();
+
+          redirectTimer(redirectID);
         };
-        function redirectTimer(){
+
+        function redirectTimer(redirectID){
           var timeleft = 5;
           var closeTimer = setInterval(
             function(){
               if (timeleft <= 0) {
-                window.location.replace("https://er3.ext.egovstack.net/en/services-new/2c92808d8187123601824e31d8530189?file_id=c54839bc-5726-44e5-92c0-c9527fa830c8");
+                window.location.replace("https://er3.ext.egovstack.net/en/services-new/2c92808d8187123601824e31d8530189?file_id=" + redirectID);
               }
               document.getElementById("back_button").innerText = "Back to the service  " + timeleft;
               timeleft -= 1;
             }, 1000
           );
         };
+
+        function redirect(){
+          window.location.replace('https://er3.ext.egovstack.net/en/services-new/2c92808d8187123601824e31d8530189?file_id=' + redirectID);
+        }
       </script>
   </body>
 </html>
