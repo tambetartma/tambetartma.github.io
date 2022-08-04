@@ -315,21 +315,21 @@
       <script>
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        const redirectID = urlParams.get('id')
+        const redirectURL = urlParams.get('url')
 
         function hidePaymentForm(){
           document.getElementById("payment_details").className = "d-none";
           document.getElementById("payment_done").className = "d-block";
 
-          redirectTimer(redirectID);
+          redirectTimer(redirectURL);
         };
 
-        function redirectTimer(redirectID){
+        function redirectTimer(redirectURL){
           var timeleft = 5;
           var closeTimer = setInterval(
             function(){
-              if (timeleft <= 0) {
-                window.location.replace("https://er3.ext.egovstack.net/en/services-new/2c92808d8187123601824e31d8530189?file_id=" + redirectID);
+              if (timeleft <= 1) {
+                window.location.replace(redirectURL);
               }
               document.getElementById("back_button").innerText = "Back to the service  " + timeleft;
               timeleft -= 1;
@@ -338,7 +338,7 @@
         };
 
         function redirect(){
-          window.location.replace('https://er3.ext.egovstack.net/en/services-new/2c92808d8187123601824e31d8530189?file_id=' + redirectID);
+          window.location.replace(redirectURL);
         }
       </script>
   </body>
